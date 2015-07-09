@@ -50,6 +50,16 @@ class physics:
 		else:
 			self.Y += self.dir
 
+	def calculateYError( self, Hmin , Hmax):
+		if( self.Y + self.dir == Hmin + 1 ):
+			return False
+		elif(self.Y + self.dir == Hmax -1):
+			return False
+		else:
+			self.Y += self.dir
+			return True
+
+
 
 
 #############################################
@@ -67,6 +77,5 @@ class MainLoop:
 
 #############################################
 GameLoop = MainLoop()
-print("ok")
 GameLoop.start()
 
