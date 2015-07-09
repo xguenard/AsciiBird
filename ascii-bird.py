@@ -1,7 +1,7 @@
 import curses 
 import time
 
-bird = ( "/\\", "\\/" )
+bird = (  "_o_", "-o-")
 
 
 class graphics:
@@ -15,41 +15,58 @@ class graphics:
 		self.H = dims[0]
 		self.W = dims[1]
 		self.bird=0
+		self.screen.border()
 
-	def printBird( self, y):
+	def printBird( self, y , k):
 		self.screen.clear()
+		self.screen.border()
 		if(self.bird == 1):
 			self.bird = 0
 		else :
 			self.bird = 1
 
-		self.screen.addstr( self.H//2 - y, self.W//8 , bird[ self.bird ])
+		self.screen.addstr( y , self.W//8 , bird[ k ])
 		self.screen.refresh()
 
 
-	def __del__(self):
-		curses.endwin()
+	#def __del__(self):
+		#curses.endwin()
 
 ############################################
 
 class physics:
-	def __init__(self):
+	def __init__(self, Ybase ):
 		self.G = 10
+		self.dir = -1
+		self.Y = Ybase
+
+	def calculateY( self, Hmin , Hmax ):
+		if( self.Y + self.dir == Hmin + 1 ):
+			self.dir = -self.dir
+			self.Y = Hmin + 1
+		elif(self.Y + self.dir == Hmax -1):
+			self.dir = -self.dir
+			self.Y = Hmax - 2
+		else:
+			self.Y += self.dir
+
+
 
 #############################################
 
 class MainLoop:
 	def __init__(self):
-		self.buffer=graphics()
-		self.engine=physics()
+		self.graphEngine=graphics()
+		self.physEngine=physics(self.graphEngine.H//2)
 
 	def start(self):
-		for i in range(1,10):
-			time.sleep(1)
-			k = i%2 - 1
-			self.buffer.printBird( k )
+		for i in range(1,100):
+			time.sleep(0.1)
+			self.physEngine.calculateY( 0 , self.graphEngine.H )
+			self.graphEngine.printBird( self.physEngine.Y , 1 )
 
 #############################################
 GameLoop = MainLoop()
+print("ok")
 GameLoop.start()
 
