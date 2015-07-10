@@ -6,7 +6,9 @@ bird = (  "_o_", "-o-")
 
 class graphics:
 	def __init__(self):
-		print("Curses initialization")
+		"""
+			Initialization of the window with the curses module.
+		"""
 		self.screen = curses.initscr()
 		curses.noecho()
 		curses.cbreak()
@@ -18,6 +20,9 @@ class graphics:
 		self.screen.border()
 
 	def printBird( self, y , k):
+		"""
+			Print the bird at the position y with the configuration k.
+		"""
 		self.screen.clear()
 		self.screen.border()
 		if(self.bird == 1):
@@ -29,18 +34,28 @@ class graphics:
 		self.screen.refresh()
 
 
-	#def __del__(self):
-		#curses.endwin()
+	def __del__(self):
+		"""
+			Destructor.
+		"""
+		curses.endwin()
 
 ############################################
 
 class physics:
 	def __init__(self, Ybase ):
+		"""
+			Initialize position and gravity.
+		"""
 		self.G = 10
 		self.dir = -1
 		self.Y = Ybase
 
 	def calculateY( self, Hmin , Hmax ):
+		"""
+			My next position depend of the direction.
+			This method is for testing.
+		"""
 		if( self.Y + self.dir == Hmin + 1 ):
 			self.dir = -self.dir
 			self.Y = Hmin + 1
@@ -51,6 +66,9 @@ class physics:
 			self.Y += self.dir
 
 	def calculateYError( self, Hmin , Hmax):
+		"""
+			My next position depend of the direction.
+		"""
 		if( self.Y + self.dir == Hmin + 1 ):
 			return False
 		elif(self.Y + self.dir == Hmax -1):
@@ -66,14 +84,24 @@ class physics:
 
 class MainLoop:
 	def __init__(self):
+		"""
+			Initialization of the graphical en physic engine.
+		"""
 		self.graphEngine=graphics()
 		self.physEngine=physics(self.graphEngine.H//2)
 
 	def start(self):
+		"""
+			Start the game loop.
+		"""
 		for i in range(1,100):
 			time.sleep(0.1)
+			if( i%20 < 10):
+				k = 1
+			else:
+				k = 0
 			self.physEngine.calculateY( 0 , self.graphEngine.H )
-			self.graphEngine.printBird( self.physEngine.Y , 1 )
+			self.graphEngine.printBird( self.physEngine.Y , k )
 
 #############################################
 GameLoop = MainLoop()
