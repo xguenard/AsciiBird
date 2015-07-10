@@ -19,26 +19,45 @@ class graphics:
 		self.bird=0
 		self.screen.border()
 
+	def clearScreen(self):
+		"""
+			I clear the screen at the beginning of my game loop.
+		"""
+		self.screen.clear()
+		self.screen.border()
+
+	def refreshScreen(self):
+		"""
+			I refresh the screen at the end of my game loop,
+			after filling with printBird and printWall.
+		"""
+		self.screen.refresh()
+
 	def printBird( self, y , k):
 		"""
 			Print the bird at the position y with the configuration k.
 		"""
-		self.screen.clear()
-		self.screen.border()
-		if(self.bird == 1):
-			self.bird = 0
-		else :
-			self.bird = 1
-
 		self.screen.addstr( y , self.W//8 , bird[ k ])
-		self.screen.refresh()
 
+	def printWall( self, x , H , side):
+		"""
+			Print the Wall at the position x, on the side side,with the size H.
+		"""
+		#side = False => top of the screen, side = True => bottom of the screen
+		if( side ):
+			self.screen.addstr( H , x , '|__|')
+			for i in range( 1 , H ):
+				self.screen.addstr(i , x , '|  |')
+		else:
+			self.screen.addstr(self.H - H , x , ' __ ')
+			for i in range( 2 , H ):
+				self.screen.addstr( self.H - i , x , '|  |')
 
 	def __del__(self):
 		"""
 			Destructor.
 		"""
-		curses.endwin()
+		#curses.endwin()
 
 ############################################
 
@@ -79,7 +98,6 @@ class physics:
 
 
 
-
 #############################################
 
 class MainLoop:
@@ -95,6 +113,8 @@ class MainLoop:
 			Start the game loop.
 		"""
 		for i in range(1,100):
+			self.graphEngine.clearScreen()
+
 			time.sleep(0.1)
 			if( i%20 < 10):
 				k = 1
@@ -102,6 +122,10 @@ class MainLoop:
 				k = 0
 			self.physEngine.calculateY( 0 , self.graphEngine.H )
 			self.graphEngine.printBird( self.physEngine.Y , k )
+			self.graphEngine.printWall( 15 ,  5 , 0)
+			self.graphEngine.printWall( 15 ,  5 , 1)
+
+			self.graphEngine.refreshScreen()
 
 #############################################
 GameLoop = MainLoop()
