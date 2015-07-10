@@ -1,7 +1,7 @@
 import curses 
 import time
 
-bird = (  "_o_", "-o-")
+bird = (  "*(v)0-", "*(^)0-")
 
 
 class graphics:
@@ -122,8 +122,8 @@ class MainLoop:
 				k = 0
 			self.physEngine.calculateY( 0 , self.graphEngine.H )
 			self.graphEngine.printBird( self.physEngine.Y , k )
-			self.graphEngine.printWall( 15 ,  5 , 0)
-			self.graphEngine.printWall( 15 ,  5 , 1)
+			self.graphEngine.printWall( 18 ,  5 , 0)
+			self.graphEngine.printWall( 18 ,  15 , 1)
 
 			self.graphEngine.refreshScreen()
 
