@@ -56,5 +56,5 @@ class engine:
 		"""
 			Destructor.
 		"""
-		curses.endwin()
+	#	curses.endwin()
 
