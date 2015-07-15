@@ -10,6 +10,7 @@ class engine:
 		"""
 		self.screen = curses.initscr()
 		curses.noecho()
+		self.screen.nodelay(1)
 		curses.cbreak()
 		self.screen.keypad( True )
 		dims = self.screen.getmaxyx()
@@ -51,6 +52,9 @@ class engine:
 			self.screen.addstr(self.H - H , x , tow[2])
 			for i in range( 2 , H ):
 				self.screen.addstr( self.H - i , x , tow[1])
+				
+	def printInput(self):
+		self.screen.addstr("Input Pressed!")
 
 	def __del__(self):
 		"""

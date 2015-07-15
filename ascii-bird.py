@@ -3,6 +3,7 @@ import time
 import graphics
 import physics
 import walls
+import event
 
 #############################################
 
@@ -23,7 +24,7 @@ class MainLoop:
 		"""
 			Start the game loop.
 		"""
-		for i in range(1,300):
+		for i in range(1,100):
 			self.graphEngine.clearScreen()
 			self.towers.printTowers()
 
@@ -46,7 +47,8 @@ class MainLoop:
 #############################################
 
 GraphEngine = graphics.engine()
-PhysEngine = physics.engine(GraphEngine.H//2)
+keyHandler = event.keysManager(GraphEngine)
+PhysEngine = physics.engine(GraphEngine.H//2, keyHandler)
 GameLoop = MainLoop(GraphEngine, PhysEngine)
 GameLoop.start()
 
