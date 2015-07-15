@@ -10,15 +10,19 @@ class tower:
 		R = random.randint( 2 , int(maxH - 10) ) #random height
 		self.H = R
 
-	def update(self):
+	def update(self,birdPos, dangerZone):
 		if( self.X == 2 ):
 			return False
 		else :
 			self.X -= 1
+			if( self.X in birdPos ):
+				dangerZone.append(self.H)
 		return True
 
+
+###########################################
 class towersManager:
-	def __init__(self, maxW, maxH, padding, vpadding, Gengine):
+	def __init__(self, maxW, maxH, padding, vpadding, Gengine, birdPos):
 		self.towerList = []
 		self.maxW = maxW
 		self.maxH = maxH
@@ -26,6 +30,8 @@ class towersManager:
 		self.minDist = maxW - padding
 		self.graphEngine = Gengine
 		self.vpadding = vpadding
+		self.dangerZone = []
+		self.birdPos = birdPos
 
 
 	def checkLastTower(self):
@@ -40,8 +46,9 @@ class towersManager:
 			self.towerList.append( tower( self.maxW , self.maxH ) )
 
 	def moveTowers(self):
+		self.dangerZone = []
 		for Twr in self.towerList:
-			if not Twr.update():
+			if not Twr.update(self.birdPos, self.dangerZone):
 				self.towerList.remove(Twr)
 
 	def printTowers(self):
@@ -50,9 +57,6 @@ class towersManager:
 		for Twr in self.towerList:
 			self.graphEngine.printWall(Twr.X , Twr.H , 1)
 			self.graphEngine.printWall(Twr.X , self.maxH - Twr.H - self.vpadding , 0)
-
-
-
 
 
 #############################################
@@ -64,7 +68,7 @@ class MainLoop:
 		"""
 		self.graphEngine= GEngine
 		self.physEngine= PEngine
-		self.towers = towersManager(80 , 25 , 20, 5 ,GEngine)
+		self.towers = towersManager(80 , 25 , 20, 5 ,GEngine, range(GEngine.posBird-1, GEngine.posBird+6 ))
 
 	def start(self):
 		"""
@@ -79,7 +83,13 @@ class MainLoop:
 				k = 1
 			else:
 				k = 0
-			self.physEngine.calculateY( 0 , self.graphEngine.H )
+
+			if self.towers.dangerZone:
+				print("test")
+				self.physEngine.calculateY( self.towers.dangerZone[0] , self.towers.dangerZone[0] + 5 )
+			else:
+				self.physEngine.calculateY( 0 , self.graphEngine.H )
+
 			self.graphEngine.printBird( self.physEngine.Y , k )
 
 			self.graphEngine.refreshScreen()

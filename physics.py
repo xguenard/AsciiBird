@@ -13,10 +13,10 @@ class engine:
 			My next position depend of the direction.
 			This method is for testing.
 		"""
-		if( self.Y + self.dir == Hmin + 1 ):
+		if( self.Y + self.dir < Hmin + 1 ):
 			self.dir = -self.dir
 			self.Y = Hmin + 1
-		elif(self.Y + self.dir == Hmax -1):
+		elif(self.Y + self.dir > Hmax -1):
 			self.dir = -self.dir
 			self.Y = Hmax - 2
 		else:

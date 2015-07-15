@@ -1,6 +1,6 @@
 import curses
 
-bird = (  "*(v)0-", "*(^)0-")
+bird = ( "*(v)0-", "*(^)0-")
 tow =  ( "|__|" , "|  |" , " __ " )
 
 class engine:
@@ -15,7 +15,7 @@ class engine:
 		dims = self.screen.getmaxyx()
 		self.H = dims[0]
 		self.W = dims[1]
-		self.bird=0
+		self.posBird=self.W//8
 		self.screen.border()
 
 	def clearScreen(self):
@@ -36,7 +36,7 @@ class engine:
 		"""
 			Print the bird at the position y with the configuration k.
 		"""
-		self.screen.addstr( y , self.W//8 , bird[ k ])
+		self.screen.addstr( y , self.posBird , bird[ k ])
 
 	def printWall( self, x , H , side):
 		"""
@@ -56,5 +56,5 @@ class engine:
 		"""
 			Destructor.
 		"""
-	#	curses.endwin()
+		curses.endwin()
 
