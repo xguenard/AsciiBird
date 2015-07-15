@@ -18,12 +18,12 @@ class towersManger:
 #############################################
 
 class MainLoop:
-	def __init__(self):
+	def __init__(self, GEngine, PEngine):
 		"""
 			Initialization of the graphical en physic engine.
 		"""
-		self.graphEngine=graphics.engine()
-		self.physEngine=physics.engine(self.graphEngine.H//2)
+		self.graphEngine= GEngine
+		self.physEngine= PEngine
 
 	def start(self):
 		"""
@@ -45,6 +45,9 @@ class MainLoop:
 			self.graphEngine.refreshScreen()
 
 #############################################
-GameLoop = MainLoop()
+
+GraphEngine = graphics.engine()
+PhysEngine = physics.engine(GraphEngine.H//2)
+GameLoop = MainLoop(GraphEngine, PhysEngine)
 GameLoop.start()
 
