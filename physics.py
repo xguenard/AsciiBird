@@ -9,7 +9,7 @@ class engine:
 		self.timePadding = tPadding
 		self.rest = 0
 
-	def calculateY( self, Hmin , Hmax ):
+	def calculateYTest( self, Hmin , Hmax ):
 		"""
 			My next position depend of the direction.
 			This method is for testing.
@@ -24,14 +24,20 @@ class engine:
 		else:
 			self.Y += self.dir
 
-	def calculateY2(self, V , Hmin , Hmax):
+	def calculateY(self, V , Hmin , Hmax):
+		"""
+			Where is my bird at the next time step?
+		"""
 		self.calculateDir()
 		if V != 0:
 			self.dir = V
-		self.calculateY( Hmin , Hmax)
+		return self.calculateYError( Hmin , Hmax)
 
 
 	def calculateDir(self):
+		"""
+			An approximation of gravity's speed modification ... with integers.
+		"""
 		if (self.dir != 1) :
 			if( self.rest > 0.5 ):
 				self.dir += 1
@@ -42,11 +48,12 @@ class engine:
 
 	def calculateYError( self, Hmin , Hmax):
 		"""
-			My next position depend of the direction.
+			My next position depends of the direction.
+			I also check collisions.
 		"""
-		if( self.Y + self.dir == Hmin + 1 ):
+		if( self.Y  <= Hmin   ):
 			return False
-		elif(self.Y + self.dir == Hmax -1):
+		elif(self.Y >= Hmax ):
 			return False
 		else:
 			self.Y += self.dir

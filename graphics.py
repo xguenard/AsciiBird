@@ -37,19 +37,39 @@ class engine:
 		self.screen.refresh()
 
 	def getKey(self):
+		"""
+			Keys manager.
+			Using a thread to wait.
+		"""
 		t = threading.Thread(target = waiter)
 		K = self.screen.getch()
-		self.screen.addstr(2 , 2 , "DEBUG INFO :" + str(K)) 
-		self.screen.refresh()
+		#FOR DEBUGGING
+		#self.screen.addstr(2 , 2 , "DEBUG INFO :" + str(K)) 
+		#self.screen.refresh()
 		t.start()
 		t.join
 		return K
+
+	def printDefeat(self):
+		"""
+			Game Over screen.
+		"""
+		self.clearScreen()
+		self.screen.addstr( self.H//2 , self.W//2 , "GAME OVER!")
+		self.refreshScreen()
 
 	def printBird( self, y , k):
 		"""
 			Print the bird at the position y with the configuration k.
 		"""
+		if( y == self.H):
+			self.screen.addstr( y-1 , self.posBird , bird[ k ])
+			return False
+		if( y == 0):
+			self.screen.addstr( 0 , self.posBird , bird[ k ])
+			return False
 		self.screen.addstr( y , self.posBird , bird[ k ])
+		return True
 
 	def printWall( self, x , H , side):
 		"""
@@ -65,12 +85,9 @@ class engine:
 			for i in range( 2 , H ):
 				self.screen.addstr( self.H - i , x , tow[1])
 				
-	def printInput(self):
-		self.screen.addstr("Input Pressed!")
-
 	def __del__(self):
 		"""
 			Destructor.
 		"""
-		#curses.endwin()
+		curses.endwin()
 
