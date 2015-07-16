@@ -1,7 +1,11 @@
 import curses
-
+import threading
+import time
 bird = ( "*(v)0-", "*(^)0-")
 tow =  ( "|__|" , "|  |" , " __ " )
+
+def waiter():
+	time.sleep(0.1)
 
 class engine:
 	def __init__(self):
@@ -10,9 +14,8 @@ class engine:
 		"""
 		self.screen = curses.initscr()
 		curses.noecho()
-		self.screen.nodelay(1)
-		curses.cbreak()
 		self.screen.keypad( True )
+		self.screen.nodelay(1)
 		dims = self.screen.getmaxyx()
 		self.H = dims[0]
 		self.W = dims[1]
@@ -32,6 +35,15 @@ class engine:
 			after filling with printBird and printWall.
 		"""
 		self.screen.refresh()
+
+	def getKey(self):
+		t = threading.Thread(target = waiter)
+		K = self.screen.getch()
+		self.screen.addstr(2 , 2 , "DEBUG INFO :" + str(K)) 
+		self.screen.refresh()
+		t.start()
+		t.join
+		return K
 
 	def printBird( self, y , k):
 		"""

@@ -3,7 +3,6 @@ import time
 import graphics
 import physics
 import walls
-import event
 
 #############################################
 
@@ -24,8 +23,14 @@ class MainLoop:
 		"""
 			Start the game loop.
 		"""
-		for i in range(1,100):
+		for i in range(1,300):
+			R =self.graphEngine.getKey()
 			self.graphEngine.clearScreen()
+
+			if (R == 119):
+				D = -1
+			else:
+				D = 0
 			self.towers.printTowers()
 
 			time.sleep(0.1)
@@ -35,10 +40,9 @@ class MainLoop:
 				k = 0
 
 			if self.towers.dangerZone:
-				print("test")
-				self.physEngine.calculateY( self.towers.dangerZone[0] , self.towers.dangerZone[0] + 5 )
+				self.physEngine.calculateY2(D, self.towers.dangerZone[0] , self.towers.dangerZone[0] + 5 )
 			else:
-				self.physEngine.calculateY( 0 , self.graphEngine.H )
+				self.physEngine.calculateY2( D, 0 , self.graphEngine.H )
 
 			self.graphEngine.printBird( self.physEngine.Y , k )
 
@@ -47,8 +51,7 @@ class MainLoop:
 #############################################
 
 GraphEngine = graphics.engine()
-keyHandler = event.keysManager(GraphEngine)
-PhysEngine = physics.engine(GraphEngine.H//2, keyHandler)
+PhysEngine = physics.engine(GraphEngine.H//2, 5)
 GameLoop = MainLoop(GraphEngine, PhysEngine)
 GameLoop.start()
 
