@@ -15,12 +15,15 @@ class TitleScreen:
 		R=-1
 		while R!=32 and R!=104:
 			R =self.graphEngine.getKey()
-			if (R==104):
+			self.graphEngine.printTitleScreen()
+
+		#si je sors de la boucle et que ma clef vaut 104 alors j'affiche les rules.				
+		#sinon je sors du code( je ne passe pas dans le if ) et le jeu se lancera
+		if (R==104): # afficher les rules = nouvelle boucle while pour attendre que le mec ait finit de les lire
+			while  R!=32:
+				R = self.graphEngine.getKey()
 				self.graphEngine.printRules()
-			else:
-				self.graphEngine.printTitleScreen()
-				
-			
+
 class MainLoop:
 	def __init__(self, GEngine, PEngine):
 		"""

@@ -57,7 +57,7 @@ class engine:
 		"""
 		curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_WHITE)
 		self.screen.addstr( self.H//3 , self.W//3 , "Press the Spacebar to start", curses.color_pair(2))
-		self.screen.addstr( self.H//2 , self.W//3 , "or press 'h' for help", curses.color_pair(2))
+		self.screen.addstr( self.H//3 + 2 , self.W//3 , "or press 'h' for help", curses.color_pair(2))
 		self.refreshScreen()
 
 	def printRules(self):
@@ -67,6 +67,7 @@ class engine:
 		self.clearScreen()
 		curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_WHITE)
 		self.screen.addstr( self.H//3 , self.W//3 , "Test rules", curses.color_pair(2))
+		self.screen.addstr( self.H//3 + 2, self.W//3 , "Press SPACE to cotinue", curses.color_pair(2))
 		self.refreshScreen()
 		
 	def printDefeat(self):
