@@ -5,6 +5,16 @@ import physics
 import walls
 
 #############################################
+class TitleScreen:
+	def __init__(self, Gengine):
+		self.graphEngine= Gengine
+		
+	def TitleScreen(self):
+		#self.graphEngine.printTitleScreen()
+		R=-1
+		while R!=10:
+			R =self.graphEngine.getKey()
+			self.graphEngine.printTitleScreen()
 
 class MainLoop:
 	def __init__(self, GEngine, PEngine):
@@ -65,6 +75,8 @@ class MainLoop:
 
 GraphEngine = graphics.engine()
 PhysEngine = physics.engine(GraphEngine.H//2, 5)
+GameStart = TitleScreen(GraphEngine)
+GameStart.TitleScreen()
 GameLoop = MainLoop(GraphEngine, PhysEngine)
 GameLoop.start()
 
