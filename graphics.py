@@ -21,6 +21,7 @@ class engine:
 		self.W = dims[1]
 		self.posBird=self.W//8
 		self.screen.border()
+		curses.start_color()
 
 	def clearScreen(self):
 		"""
@@ -49,6 +50,15 @@ class engine:
 		t.start()
 		t.join
 		return K
+
+	def printTitleScreen(self):
+		"""
+			Title screen.
+		"""
+		curses.init_pair(1, curses.COLOR_RED, curses.COLOR_WHITE)
+		curses.init_pair(2, curses.COLOR_GREEN, curses.COLOR_RED)
+		self.screen.addstr( self.H//2 , self.W//3 , "Press Enter to launch the game", curses.color_pair(2))
+		self.refreshScreen()
 
 	def printDefeat(self):
 		"""
