@@ -56,7 +56,7 @@ class engine:
 			Title screen.
 		"""
 		curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_WHITE)
-		self.screen.addstr( self.H//3 , self.W//3 , "Press the Spacebar to start", curses.color_pair(2))
+		self.screen.addstr( self.H//3 , self.W//3 , "Press SPACE to start", curses.color_pair(2))
 		self.screen.addstr( self.H//3 + 2 , self.W//3 , "or press 'h' for help", curses.color_pair(2))
 		self.refreshScreen()
 
@@ -66,8 +66,12 @@ class engine:
 		"""	
 		self.clearScreen()
 		curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_WHITE)
-		self.screen.addstr( self.H//3 , self.W//3 , "Test rules", curses.color_pair(2))
-		self.screen.addstr( self.H//3 + 2, self.W//3 , "Press SPACE to cotinue", curses.color_pair(2))
+		self.screen.addstr( self.H//3 , self.W//3 , "*(v)0- Welcome to ASCII-BIRD -0(v)*", curses.color_pair(2))
+		self.screen.addstr( self.H//3 + 2, self.W//5 , "Let's talk about the rules", curses.color_pair(2))
+		self.screen.addstr( self.H//3 + 4, self.W//5 , "Rule #1: Don't touch the pipes, the ground or the ceilling", curses.color_pair(2))
+		self.screen.addstr( self.H//3 + 5, self.W//5 , "Rule #2: Use the spacebar to move your bird", curses.color_pair(2))
+		self.screen.addstr( self.H//3 + 6, self.W//5 , "Rule #3: Do the best score ever", curses.color_pair(2))
+		self.screen.addstr( self.H//3 + 8, self.W//5 , "Press SPACE to continue", curses.color_pair(2))
 		self.refreshScreen()
 		
 	def printDefeat(self):
@@ -110,4 +114,3 @@ class engine:
 			Destructor.
 		"""
 		curses.endwin()
-
