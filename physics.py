@@ -1,3 +1,4 @@
+
 class engine:
 	def __init__(self, Ybase , tPadding):
 		"""
@@ -36,7 +37,6 @@ class engine:
 				self.dir -= 1
 		return self.calculateYError( Hmin , Hmax)
 
-
 	def calculateDir(self):
 		"""
 			An approximation of gravity's speed modification ... with integers.
@@ -47,7 +47,6 @@ class engine:
 				self.rest = 0
 			else:
 				self.rest += self.G/self.timePadding
-
 
 	def calculateYError( self, Hmin , Hmax):
 		"""

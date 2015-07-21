@@ -20,7 +20,6 @@ class tower:
 				dangerZone.append(self.H)
 		return True
 
-
 ###########################################
 class towersManager:
 	def __init__(self, maxW, maxH, padding , vpadding, Gengine, birdPos):
@@ -34,7 +33,6 @@ class towersManager:
 		self.vpadding = vpadding
 		self.dangerZone = []
 		self.birdPos = birdPos
-
 
 	def checkLastTower(self):
 		if not self.towerList :

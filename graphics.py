@@ -80,15 +80,16 @@ class engine:
 		self.screen.addstr( self.H//3 + 8, self.W//5 , "Press SPACE to continue", curses.color_pair(2))
 		self.refreshScreen()
 		
-	def printDefeat(self):
+	def printDefeat(self, score):
 		"""
 			Game Over screen.
 		"""
 		self.clearScreen()
 		curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_WHITE)
-		self.screen.addstr( self.H//2 , self.W//3+10 , "GAME OVER!", curses.color_pair(2))
-		self.screen.addstr( self.H//2+3 , self.W//3+5 , "Press Spacebar to restart", curses.color_pair(2))
-		self.screen.addstr( self.H//2+5 , self.W//3+5 , "Press any other key to quit", curses.color_pair(2))
+		self.screen.addstr( self.H//2 , self.W//3+5 , "GAME OVER!", curses.color_pair(2))
+		self.screen.addstr( self.H//2+3 , self.W//3 , "Your score : " + str(score), curses.color_pair(2))
+		self.screen.addstr( self.H//2+6 , self.W//3  , "Press Spacebar to restart", curses.color_pair(2))
+		self.screen.addstr( self.H//2+7 , self.W//3 , "Press any other key to quit", curses.color_pair(2))
 		self.refreshScreen()
 
 	def printBird( self, y , k):
