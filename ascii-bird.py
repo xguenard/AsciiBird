@@ -79,12 +79,30 @@ class MainLoop:
 		time.sleep(2)
 		self.graphEngine.printDefeat()
 
+class EndScreen:
+	def __init__(self, Gengine):
+		self.graphEngine= Gengine
+
+	def checkForEnd(self):
+		time.sleep(2)
+		self.graphEngine.printDefeat()
+		##Ajouter une methode pour savoir si il presse la clef espace
+		##Si il presse la clef espace:
+			##return False
+		##sinon
+		return True;
+		
 #############################################
 
 GraphEngine = graphics.engine()
 PhysEngine = physics.engine(GraphEngine.H//2, 5)
 GameStart = TitleScreen(GraphEngine)
 GameStart.TitleScreen()
+GameEnd = EndScreen(GraphEngine)
 GameLoop = MainLoop(GraphEngine, PhysEngine)
-GameLoop.start()
+
+cond = True
+while cond:
+	GameLoop.start()
+	cond = GameEnd.checkForEnd()
 
