@@ -79,7 +79,9 @@ class engine:
 			Game Over screen.
 		"""
 		self.clearScreen()
-		self.screen.addstr( self.H//2 , self.W//2 , "GAME OVER!")
+		curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_WHITE)
+		self.screen.addstr( self.H//2 , self.W//3+10 , "GAME OVER!", curses.color_pair(2))
+		self.screen.addstr( self.H//2+3 , self.W//3+5 , "Press Spacebar to restart", curses.color_pair(2))
 		self.refreshScreen()
 
 	def printBird( self, y , k):
