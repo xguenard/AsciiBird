@@ -95,14 +95,14 @@ class EndScreen:
 #############################################
 
 GraphEngine = graphics.engine()
-PhysEngine = physics.engine(GraphEngine.H//2, 5)
 GameStart = TitleScreen(GraphEngine)
 GameStart.TitleScreen()
 GameEnd = EndScreen(GraphEngine)
-GameLoop = MainLoop(GraphEngine, PhysEngine)
 
 cond = True
 while cond:
+	PhysEngine = physics.engine(GraphEngine.H//2, 5)
+	GameLoop = MainLoop(GraphEngine, PhysEngine)
 	GameLoop.start()
 	cond = GameEnd.checkForEnd()
 
