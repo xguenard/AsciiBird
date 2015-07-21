@@ -42,6 +42,7 @@ class MainLoop:
 		"""
 			Start the game loop.
 		"""
+		self.graphEngine.flushInputs()
 		cond = True
 		i = 0
 		while cond:
@@ -73,25 +74,23 @@ class MainLoop:
 				tmp = self.graphEngine.printBird( self.physEngine.Y , k )
 
 			self.graphEngine.refreshScreen()
-
 			i+=1
+		#	if( i % 10 == 0 ):# flush input every 1 seconde
+		#		self.graphEngine.flushInputs()
 
-		time.sleep(2)
-		self.graphEngine.printDefeat()
 
 class EndScreen:
 	def __init__(self, Gengine):
 		self.graphEngine= Gengine
 
 	def checkForEnd(self):
+		time.sleep(1)
 		R=-1
-		while R!=32 and R!=113:
-			R =self.graphEngine.getKey()
-			self.graphEngine.printDefeat()
-			if (R==32):
-				return True
-			elif (R==113):
-				return False
+		self.graphEngine.printDefeat()
+		R =self.graphEngine.getStaticKey()
+		if (R==32):
+			return True
+		return False
 		
 #############################################
 

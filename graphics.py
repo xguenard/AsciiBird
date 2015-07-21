@@ -37,6 +37,15 @@ class engine:
 		"""
 		self.screen.refresh()
 
+	def flushInputs(self):
+		curses.flushinp()
+
+	def getStaticKey(self):
+		self.screen.nodelay(0)
+		K = self.screen.getch()
+		self.screen.nodelay(1)
+		return K
+
 	def getKey(self):
 		"""
 			Keys manager.
@@ -44,9 +53,6 @@ class engine:
 		"""
 		t = threading.Thread(target = waiter)
 		K = self.screen.getch()
-		#FOR DEBUGGING
-		#self.screen.addstr(2 , 2 , "DEBUG INFO :" + str(K)) 
-		#self.screen.refresh()
 		t.start()
 		t.join
 		return K
@@ -82,16 +88,17 @@ class engine:
 		curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_WHITE)
 		self.screen.addstr( self.H//2 , self.W//3+10 , "GAME OVER!", curses.color_pair(2))
 		self.screen.addstr( self.H//2+3 , self.W//3+5 , "Press Spacebar to restart", curses.color_pair(2))
+		self.screen.addstr( self.H//2+5 , self.W//3+5 , "Press any other key to quit", curses.color_pair(2))
 		self.refreshScreen()
 
 	def printBird( self, y , k):
 		"""
 			Print the bird at the position y with the configuration k.
 		"""
-		if( y == self.H):
-			self.screen.addstr( y-1 , self.posBird , bird[ k ])
+		if( y >= self.H):
+			self.screen.addstr( self.H-1 , self.posBird , bird[ k ])
 			return False
-		if( y == 0):
+		if( y <= 0):
 			self.screen.addstr( 0 , self.posBird , bird[ k ])
 			return False
 		self.screen.addstr( y , self.posBird , bird[ k ])

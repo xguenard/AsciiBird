@@ -29,8 +29,11 @@ class engine:
 			Where is my bird at the next time step?
 		"""
 		self.calculateDir()
-		if V != 0:
-			self.dir = V
+		if V!= 0 :
+			if self.dir > 0 :
+				self.dir = -1
+			elif self.dir > -2:
+				self.dir -= 1
 		return self.calculateYError( Hmin , Hmax)
 
 
@@ -38,7 +41,7 @@ class engine:
 		"""
 			An approximation of gravity's speed modification ... with integers.
 		"""
-		if (self.dir != 1) :
+		if (self.dir != 2) :
 			if( self.rest > 0.5 ):
 				self.dir += 1
 				self.rest = 0
