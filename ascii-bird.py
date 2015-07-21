@@ -84,13 +84,14 @@ class EndScreen:
 		self.graphEngine= Gengine
 
 	def checkForEnd(self):
-		time.sleep(2)
-		self.graphEngine.printDefeat()
-		##Ajouter une methode pour savoir si il presse la clef espace
-		##Si il presse la clef espace:
-			##return False
-		##sinon
-		return True;
+		R=-1
+		while R!=32 and R!=113:
+			R =self.graphEngine.getKey()
+			self.graphEngine.printDefeat()
+			if (R==32):
+				return True
+			elif (R==113):
+				return False
 		
 #############################################
 
@@ -105,4 +106,3 @@ while cond:
 	GameLoop = MainLoop(GraphEngine, PhysEngine)
 	GameLoop.start()
 	cond = GameEnd.checkForEnd()
-
