@@ -4,8 +4,6 @@ import graphics
 import physics
 import walls
 
-#############################################
-
 score = 0
 
 class TitleScreen:
