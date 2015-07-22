@@ -19,21 +19,40 @@ class TitleScreen:
 			while  R!=32:
 				R = self.graphEngine.getKey()
 				self.graphEngine.printRules()
+				
+class GameDifficulty:
+	def __init__(self, Gengine):
+		self.graphEngine = Gengine
+	
+	def ChooseDifficultyScreen(self):
+		R=-1
+		global level
+		while R!=97 and R!=98 and R!=99:
+			R =self.graphEngine.getKey()
+			self.graphEngine.printDifficulty()
+		if (R==97):
+			level = 11
+		elif (R==98):
+			level = 8
+		elif (R==99):
+			level = 5
 
 class MainLoop:
 	def __init__(self, GEngine, PEngine):
 		"""
 			Initialization of the graphical en physic engine.
 		"""
+		
 		padding = 30
 		vpadding = 10
 		self.graphEngine= GEngine
 		self.physEngine= PEngine
-		self.vpadding = 8
+		self.vpadding = level
 		self.towers = walls.towersManager( GEngine.W , GEngine.H 
 									, 30, self.vpadding , GEngine 
 									, range(GEngine.posBird-4, GEngine.posBird+6 ))
-
+		
+		
 	def start(self):
 		"""
 			Start the game loop.
@@ -102,6 +121,8 @@ def main():
 	GraphEngine = graphics.engine()
 	GameStart = TitleScreen(GraphEngine)
 	GameStart.TitleScreen()
+	GameLevel = GameDifficulty(GraphEngine)
+	GameLevel.ChooseDifficultyScreen()
 	GameEnd = EndScreen(GraphEngine)
 
 	cond = True
