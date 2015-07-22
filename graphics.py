@@ -62,7 +62,7 @@ class engine:
 			Title screen.
 		"""
 		curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_WHITE)
-		self.screen.addstr( self.H//3 , self.W//3 , "Press SPACE to start", curses.color_pair(2))
+		self.screen.addstr( self.H//3 , self.W//3 , "Press SPACE to choose your level difficulty", curses.color_pair(2))
 		self.screen.addstr( self.H//3 + 2 , self.W//3 , "or press 'h' for help", curses.color_pair(2))
 		self.refreshScreen()
 
@@ -78,6 +78,19 @@ class engine:
 		self.screen.addstr( self.H//3 + 5, self.W//5 , "Rule #2: Use the spacebar to move your bird", curses.color_pair(2))
 		self.screen.addstr( self.H//3 + 6, self.W//5 , "Rule #3: Do the best score ever", curses.color_pair(2))
 		self.screen.addstr( self.H//3 + 8, self.W//5 , "Press SPACE to continue", curses.color_pair(2))
+		self.refreshScreen()
+		
+	def printDifficulty(self):
+		"""
+			Select Difficulty.
+		"""	
+		self.clearScreen()
+		curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_WHITE)
+		self.screen.addstr( self.H//3 , self.W//3 , "Choose your destiny", curses.color_pair(2))
+		self.screen.addstr( self.H//3 + 2, self.W//5 , "Press a, b ou c to select difficulty", curses.color_pair(2))
+		self.screen.addstr( self.H//3 + 4, self.W//5 , "a: Easy. Are you still in your egg?", curses.color_pair(2))
+		self.screen.addstr( self.H//3 + 5, self.W//5 , "b: Medium. Nice! You're learning to fly!", curses.color_pair(2))
+		self.screen.addstr( self.H//3 + 6, self.W//5 , "c: Hard. You are like an eagle!", curses.color_pair(2))
 		self.refreshScreen()
 		
 	def printDefeat(self, score):
