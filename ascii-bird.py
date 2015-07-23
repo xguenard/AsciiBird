@@ -1,5 +1,4 @@
 import time
-
 import graphics
 import physics
 import walls
@@ -99,6 +98,8 @@ class MainLoop:
 			self.graphEngine.refreshScreen()
 
 			i+=1
+			
+			self.graphEngine.printScore(score)
 
 		self.graphEngine.flushInputs()
 
