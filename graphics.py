@@ -92,14 +92,16 @@ class engine:
 		self.screen.addstr( self.H//3 + 5, self.W//5 , "b: Medium. Nice! You're learning to fly!", curses.color_pair(2))
 		self.screen.addstr( self.H//3 + 6, self.W//5 , "c: Hard. You are like an eagle!", curses.color_pair(2))
 		self.refreshScreen()
-		
+	
+
 	def printScore(self, score):
 		"""
 			Print live score.
 		"""	
 		curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_WHITE)
 		self.screen.addstr( 1 , 1 , "Your score : " + str(score), curses.color_pair(2))
-		
+	
+
 	def printDefeat(self, score):
 		"""
 			Game Over screen.
@@ -107,7 +109,7 @@ class engine:
 		self.clearScreen()
 		curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_WHITE)
 		self.screen.addstr( self.H//2 , self.W//3+5 , "GAME OVER!", curses.color_pair(2))
-		self.screen.addstr( self.H//2+3 , self.W//3 , "Your score : " + str(score), curses.color_pair(2))
+		self.screen.addstr( self.H//2+3 , self.W//3 , "Final score : " + str(score), curses.color_pair(2))
 		self.screen.addstr( self.H//2+6 , self.W//3  , "Press Spacebar to restart", curses.color_pair(2))
 		self.screen.addstr( self.H//2+7 , self.W//3 , "Press any other key to quit", curses.color_pair(2))
 		self.refreshScreen()
