@@ -93,7 +93,6 @@ class engine:
 		self.screen.addstr( self.H//3 + 6, self.W//5 , "c: Hard. You are like an eagle!", curses.color_pair(2))
 		self.refreshScreen()
 	
-
 	def printScore(self, score):
 		"""
 			Print live score.
@@ -101,7 +100,6 @@ class engine:
 		curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_WHITE)
 		self.screen.addstr( 1 , 1 , "Your score : " + str(score), curses.color_pair(2))
 	
-
 	def printDefeat(self, score):
 		"""
 			Game Over screen.
