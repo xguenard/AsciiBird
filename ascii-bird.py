@@ -12,12 +12,12 @@ class TitleScreen:
 	def TitleScreen(self):
 		R=-1
 		while R!=32 and R!=104:
-			R =self.graphEngine.getKey()
 			self.graphEngine.printTitleScreen()
+			R =self.graphEngine.getStaticKey()
 		if (R==104):
 			while  R!=32:
-				R = self.graphEngine.getKey()
 				self.graphEngine.printRules()
+				R = self.graphEngine.getStaticKey()
 				
 class GameDifficulty:
 	def __init__(self, Gengine):
@@ -27,8 +27,8 @@ class GameDifficulty:
 		R=-1
 		global level
 		while R!=97 and R!=98 and R!=99:
-			R =self.graphEngine.getKey()
 			self.graphEngine.printDifficulty()
+			R =self.graphEngine.getStaticKey()
 		if (R==97):
 			level = 11
 		elif (R==98):
@@ -50,7 +50,6 @@ class MainLoop:
 		self.towers = walls.towersManager( GEngine.W , GEngine.H 
 									, 30, self.vpadding , GEngine 
 									, range(GEngine.posBird-4, GEngine.posBird+6 ))
-		
 		
 	def start(self):
 		"""
