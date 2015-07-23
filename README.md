@@ -1,6 +1,6 @@
 # AsciiBird
 
-AsciiBird is port of Flappy Bird based on curses .
+AsciiBird is an ncurses port of Flappy Bird.
 
 This game uses the curses librairy and Python 3.4.
 
